@@ -1,0 +1,10 @@
+{
+  "name": "Forge Funnel — lead re-engagement mirror",
+  "schedule": "every 6 hours",
+  "steps": [
+    { "module": "PostgreSQL", "action": "query", "sql": "select l.id, l.email, l.source_tool, l.intent, l.stack_recommendation from leads l left join clicks c on c.lead_id = l.id where c.id is null and l.created_at > now() - interval '24 hours' and not exists (select 1 from nurture_sends ns where ns.lead_id = l.id and ns.sequence_step = 'reengagement-0');" },
+    { "module": "OpenAI", "action": "chat completion", "model": "gpt-4o-mini", "instruction": "Write a short re-engagement email using the source tool and intent. Never name a brand. Return subject and html." },
+    { "module": "Resend", "action": "send email", "from": "{{FROM_EMAIL}}", "to": "{{email}}", "subject": "{{subject}}", "html": "{{html}}" },
+    { "module": "PostgreSQL", "action": "execute", "sql": "insert into nurture_sends(lead_id, sequence_step) values ({{id}}, 'reengagement-0') on conflict do nothing;" }
+  ]
+}

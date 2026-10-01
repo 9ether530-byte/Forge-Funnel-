@@ -1,0 +1,15 @@
+{
+  "routes": [
+    { "path": "/", "title": "Forge Funnel" },
+    { "path": "/tools", "title": "Free AI tools" },
+    { "path": "/tools/gpt-wrapper", "title": "AI text rewriter" },
+    { "path": "/tools/bg-remover", "title": "Background remover" },
+    { "path": "/tools/upscaler", "title": "Image upscaler" },
+    { "path": "/tools/headshot", "title": "AI headshot generator" },
+    { "path": "/tools/seo-audit", "title": "SEO audit tool" },
+    { "path": "/chat", "title": "Tool advisor" },
+    { "path": "/privacy", "title": "Privacy policy" },
+    { "path": "/terms", "title": "Terms of use" },
+    { "path": "/go/:offerId", "title": "Affiliate redirect" }
+  ]
+}

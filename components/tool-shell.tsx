@@ -1,0 +1,7 @@
+import Link from 'next/link';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+export function ToolShell({ eyebrow, title, description, children, slug, note }: { eyebrow: string; title: string; description: string; children: React.ReactNode; slug: string; note: string }) {
+  return <main className="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-20"><Link href="/tools" className="inline-flex items-center gap-2 text-sm text-mist hover:text-paper"><ArrowLeft className="size-4" />All tools</Link><div className="mt-12 grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start"><div className="lg:sticky lg:top-28"><Badge tone="signal">{eyebrow}</Badge><h1 className="mt-5 max-w-xl text-4xl font-semibold tracking-[-0.04em] text-paper sm:text-6xl">{title}</h1><p className="mt-6 max-w-lg text-base leading-8 text-mist">{description}</p><div className="mt-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-mist"><span className="size-2 rounded-full bg-signal" />3 free runs per day <span className="text-line">/</span> value first, always</div><p className="mt-8 max-w-sm border-l border-signal/50 pl-4 text-sm leading-6 text-mist">{note}</p></div><div>{children}<div className="mt-6 flex items-center justify-between border-t border-line pt-5 text-xs text-mist"><span>{slug}</span><Link href="/chat" className="inline-flex items-center gap-2 hover:text-signal">Need a stack? Ask the advisor <ArrowRight className="size-3.5" /></Link></div></div></div></main>;
+}

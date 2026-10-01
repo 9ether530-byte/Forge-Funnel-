@@ -1,0 +1,16 @@
+import Link from 'next/link';
+import { ArrowRight, Image, ScanSearch, Type, UserRound, WandSparkles } from 'lucide-react';
+import type { Metadata } from 'next';
+import { Badge } from '@/components/ui/badge';
+
+export const metadata: Metadata = { title: 'Free AI tools', description: 'Run five free tools for text, images, headshots, and SEO. See useful output before the email gate.' };
+
+const tools = [
+  { href: '/tools/gpt-wrapper', icon: Type, label: 'Text', title: 'AI text rewriter', copy: 'Clearer copy from the rough version you already have.' },
+  { href: '/tools/bg-remover', icon: Image, label: 'Image', title: 'Background remover', copy: 'Create a clean transparent cutout from a source image.' },
+  { href: '/tools/upscaler', icon: WandSparkles, label: 'Image', title: 'Image upscaler', copy: 'Upscale a real image with a useful, downloadable result.' },
+  { href: '/tools/headshot', icon: UserRound, label: 'Portrait', title: 'AI headshot generator', copy: 'Turn a source photo into a polished professional variation.' },
+  { href: '/tools/seo-audit', icon: ScanSearch, label: 'B2B', title: 'SEO audit tool', copy: 'Score the fundamentals and get specific fixes to work on.' },
+];
+
+export default function ToolsPage() { return <main className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-24"><div className="max-w-3xl"><Badge tone="signal">Five free tools</Badge><h1 className="mt-6 text-5xl font-semibold tracking-[-.06em] text-paper sm:text-7xl">Useful output for the work that usually gets stuck.</h1><p className="mt-7 text-lg leading-8 text-mist">Pick a tool, run it free, and keep the result. If you want the next layer after that, the advisor is waiting.</p></div><div className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{tools.map(({ href, icon: Icon, label, title, copy }, index) => <Link href={href} key={href} className={`group rounded-3xl border border-line bg-panel/60 p-7 transition hover:-translate-y-1 hover:border-signal/60 ${index === 4 ? 'lg:col-span-1' : ''}`}><div className="flex items-center justify-between"><span className="grid size-12 place-items-center rounded-2xl bg-signal/10 text-signal"><Icon className="size-5" /></span><span className="eyebrow text-mist">{label}</span></div><h2 className="mt-16 text-2xl font-semibold tracking-[-.03em] text-paper">{title}</h2><p className="mt-3 max-w-xs text-sm leading-6 text-mist">{copy}</p><span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-signal">Run it free <ArrowRight className="size-4 transition group-hover:translate-x-1" /></span></Link>)}</div><div className="mt-16 rounded-3xl border border-signal/30 bg-signal/[0.05] p-7 sm:p-10"><p className="eyebrow text-signal">Next layer</p><div className="mt-3 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><h2 className="text-3xl font-semibold tracking-[-.04em] text-paper">Not sure what to use after the tool?</h2><p className="mt-3 max-w-xl text-sm leading-6 text-mist">The tool advisor asks three questions max, then builds a stack from the approved catalog.</p></div><Link href="/chat" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-signal px-5 text-sm font-semibold text-ink hover:bg-white">Open advisor <ArrowRight className="size-4" /></Link></div></div></main>; }

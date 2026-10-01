@@ -1,0 +1,6 @@
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+
+export function SiteHeader() {
+  return <header className="sticky top-0 z-40 border-b border-line/70 bg-ink/90 backdrop-blur-xl"><div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8"><Link href="/" className="flex items-center gap-3" aria-label="Forge Funnel home"><span className="grid size-9 place-items-center rounded-xl bg-signal font-mono text-lg font-bold text-ink">F</span><span className="font-mono text-sm font-bold tracking-[0.2em] text-paper">FORGE<span className="text-signal">/</span>FUNNEL</span></Link><nav className="hidden items-center gap-7 text-sm text-mist md:flex"><Link href="/tools" className="transition hover:text-paper">Free tools</Link><Link href="/chat" className="transition hover:text-paper">Tool advisor</Link><Link href="/tools/seo-audit" className="transition hover:text-paper">SEO audit</Link></nav><Link href="/tools" className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-xs font-semibold text-paper transition hover:border-signal hover:text-signal">Open toolkit <ArrowUpRight className="size-3.5" /></Link></div></header>;
+}
