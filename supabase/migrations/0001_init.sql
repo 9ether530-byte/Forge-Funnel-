@@ -73,7 +73,9 @@ create table if not exists content_pages (
 create table if not exists nurture_sends (
   lead_id uuid references leads(id) on delete cascade,
   sequence_step text not null,
-  sent_at timestamptz not null default now(),
+  status text not null default 'claimed' check (status in ('claimed', 'sent', 'failed')),
+  claimed_at timestamptz not null default now(),
+  sent_at timestamptz,
   primary key (lead_id, sequence_step)
 );
 
