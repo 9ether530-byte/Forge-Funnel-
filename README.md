@@ -29,6 +29,7 @@ Every free tool is quota checked before work and logged after work. The value-fi
 - Import `n8n/workflow-funnel.json` into n8n and connect Postgres, OpenAI, and Resend credentials.
 - Use `automation/make-reengagement.json` as the Make.com mirror.
 - Both exports use **at-most-once delivery**: they claim a lead in `nurture_sends` before calling OpenAI or Resend. If a later step fails, the lead stays claimed and is not automatically retried; inspect `status = 'claimed'` for manual reconciliation.
+- Use `automation/reconciliation.sql` for a read-only review of claimed records, including lead email, source tool, claim age, sequence step, and send status. It never releases or retries a claim.
 - Vercel-compatible cron declarations live in `vercel.json`; managed hosting can call the same bearer-protected endpoints.
 - `agents/` contains the prompt library and `AG-05-seo-engine.ts` content generator.
 
