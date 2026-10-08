@@ -1,6 +1,6 @@
 # Self-hosted Woodpecker CI
 
-This is a portable Docker Compose baseline for the open-source Woodpecker server and one Docker agent. The current GitHub activation target is `9ether530-byte/forge-ai-test-repo`.
+This is a portable Docker Compose baseline for the open-source Woodpecker server and one Docker agent. The current GitHub activation target is `9ether530-byte/Forge-Funnel-`.
 
 ## Before starting
 
@@ -26,7 +26,7 @@ docker compose pull
 docker compose up -d
 ```
 
-Open `WOODPECKER_HOST`, sign in through GitHub, activate `9ether530-byte/forge-ai-test-repo`, and keep that repository's `.woodpecker.yml` enabled. If the pipeline is intended for a different repository, replace the activation target rather than changing the Compose file.
+Open `WOODPECKER_HOST`, sign in through GitHub, activate `9ether530-byte/Forge-Funnel-`, and keep that repository's `.woodpecker.yml` enabled. If the pipeline is intended for a different repository, replace the activation target rather than changing the Compose file.
 
 ## Persistence and security
 
