@@ -1,12 +1,12 @@
 # Self-hosted Woodpecker CI
 
-This is a portable Docker Compose baseline for the open-source Woodpecker server and one Docker agent.
+This is a portable Docker Compose baseline for the open-source Woodpecker server and one Docker agent. The current GitHub activation target is `9ether530-byte/forge-ai-test-repo`.
 
 ## Before starting
 
 1. Choose a persistent Linux host with Docker Engine and Compose v2.
 2. Put the host behind HTTPS at the exact `WOODPECKER_HOST` URL.
-3. Register an OAuth application with the selected forge. For the GitHub defaults, use the callback URL:
+3. Register an OAuth application with GitHub. Use the callback URL:
 
 ```text
 https://ci.example.com/authorize
@@ -26,7 +26,7 @@ docker compose pull
 docker compose up -d
 ```
 
-Open `WOODPECKER_HOST`, sign in through the forge, activate this repository, and keep the repository's `.woodpecker.yml` enabled.
+Open `WOODPECKER_HOST`, sign in through GitHub, activate `9ether530-byte/forge-ai-test-repo`, and keep that repository's `.woodpecker.yml` enabled. If the pipeline is intended for a different repository, replace the activation target rather than changing the Compose file.
 
 ## Persistence and security
 
@@ -39,7 +39,7 @@ Open `WOODPECKER_HOST`, sign in through the forge, activate this repository, and
 
 ## Forge variants
 
-The Compose file is GitHub-configured by default because it is a common external-forge setup. For Gitea or Forgejo, follow Woodpecker's official forge configuration and replace the `WOODPECKER_GITHUB_*` settings with that provider's variables. Keep the agent secret shared between server and agent.
+The Compose file is GitHub-configured by default. For Gitea or Forgejo, follow Woodpecker's official forge configuration and replace the `WOODPECKER_GITHUB_*` settings with that provider's variables. Keep the agent secret shared between server and agent.
 
 ## Upgrade and rollback
 
