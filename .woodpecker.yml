@@ -1,0 +1,23 @@
+# Open-source Woodpecker CI pipeline.
+# No provider secrets are required: this workflow validates static contracts only.
+
+steps:
+  validate-skill-package:
+    image: python:3.11-slim
+    commands:
+      - python ci/validate_skill_package.py
+      - python /tmp/production-funnel-automation/scripts/validate_exports.py n8n/workflow-funnel.json automation/make-reengagement.json automation/reconciliation.sql
+
+  validate-automation-json:
+    image: python:3.11-slim
+    commands:
+      - python ci/validate_automation_json.py
+
+  app-quality:
+    image: node:22-bookworm
+    commands:
+      - corepack enable
+      - pnpm install --frozen-lockfile
+      - pnpm typecheck
+      - pnpm lint
+      - pnpm build
