@@ -1,0 +1,36 @@
+services:
+  woodpecker-server:
+    image: woodpeckerci/woodpecker-server:v3
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    volumes:
+      - woodpecker-server-data:/var/lib/woodpecker
+    environment:
+      WOODPECKER_OPEN: "false"
+      WOODPECKER_HOST: ${WOODPECKER_HOST}
+      WOODPECKER_GITHUB: ${WOODPECKER_GITHUB:-true}
+      WOODPECKER_GITHUB_CLIENT: ${WOODPECKER_GITHUB_CLIENT}
+      WOODPECKER_GITHUB_SECRET: ${WOODPECKER_GITHUB_SECRET}
+      WOODPECKER_AGENT_SECRET: ${WOODPECKER_AGENT_SECRET}
+      WOODPECKER_SERVER_ADDR: ${WOODPECKER_SERVER_ADDR:-:8000}
+      WOODPECKER_GRPC_ADDR: ${WOODPECKER_GRPC_ADDR:-:9000}
+
+  woodpecker-agent:
+    image: woodpeckerci/woodpecker-agent:v3
+    command: agent
+    restart: unless-stopped
+    depends_on:
+      - woodpecker-server
+    environment:
+      WOODPECKER_SERVER: ${WOODPECKER_AGENT_SERVER:-woodpecker-server:9000}
+      WOODPECKER_AGENT_SECRET: ${WOODPECKER_AGENT_SECRET}
+      WOODPECKER_MAX_WORKFLOWS: ${WOODPECKER_MAX_WORKFLOWS:-2}
+    volumes:
+      - woodpecker-agent-config:/etc/woodpecker
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  woodpecker-server-data:
+  woodpecker-agent-config:
